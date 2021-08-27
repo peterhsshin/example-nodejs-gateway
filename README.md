@@ -13,7 +13,7 @@ This demo gateway uses the [Major Tom Gateway Package](https://npmjs.com/package
 2. Clone this repo with git
 3. In a terminal window, navigate into the demo folder and install the project dependencies from npm
 ```sh
-$ cd mt-demo-js
+$ cd example-nodejs-gateway
 $ npm install
 ```
 
@@ -24,14 +24,14 @@ Once you add the Gateway, you'll need the **Authentication Token** to connect th
 ![Gateway Page](assets/gateway_page.png "Gateway Page in Major Tom")
 
 ## Connect the Gateway
-1. You'll need to edit the file found at `mt-demo-js/connect/connection.json` in the following way:
+1. You'll need to edit the file found at `example-nodejs-gateway/connect/connection.json` in the following way:
 ```json
 {
   "gatewayToken": "<YOUR-GATEWAY-TOKEN>",
-  "host": "app.majortom.cloud" // Or your Major Tom url host location
+  "host": "app.majortom.cloud (Or your Major Tom url host location)"
 }
 ```
-2. From a terminal window in the `mt-demo-js` directory, start the app using the start script:
+2. From a terminal window in the `example-nodejs-gateway` directory, start the app using the start script:
 ```sh
 $ npm run start
 ```
@@ -42,11 +42,11 @@ $ npm run start
 4. You'll also see a log message showing that the example sat has sent Major Tom a copy of its command definitions. This will serve to automatically create the satellite in Major Tom if it doesn't exist yet, and set it up with the commands it recognizes.
 
 ### Note on Major Tom Deployment Environments
-If you have Basic Authentication enabled on your deployment (usually true if you're accessing it over anything other than `app.majortom.cloud`), you'll need to enter those credentials in `mt-demo-js/connect/connection.json` to connect.
+If you have Basic Authentication enabled on your deployment (usually true if you're accessing it over anything other than `app.majortom.cloud`), you'll need to enter those credentials in `example-nodejs-gateway/connect/connection.json` to connect.
 
 Enter basicauth login credentials for your Major Tom deployment (if it’s active) in the form `"basicAuth": "<username>:<password>@"`, for example: `"basicAuth": "kubos:password123@"`.
 
-If you are running the on-prem version of Major Tom, you'll need to include the field `"http": true` in `mt-demo-js/connect/connection.json`, as we currently do not support https for on prem.
+If you are running the on-prem version of Major Tom, you'll need to include the field `"http": true` in `example-nodejs-gateway/connect/connection.json`, as we currently do not support https for on prem.
 
 ## What does this Demo do?
 Now that you've connected the gateway, it will automatically create a new satellite (as noted above) and load command definitions for it.
@@ -64,4 +64,4 @@ Clicking on it will take you to its commanding page, and you can fire away!
 The Mission Dashboard allows you to monitor and control everything on the Mission. Add cards and play with their settings to see what you can do!
 
 ### Integrate Your System
-Now that you understand how the integration works, try augmenting the Demo Gateway to actually communicate with your hardware and software! Then you can begin controlling and monitoring your own spacecraft. If you want to get a better sense of how easy it is to build a Gateway in NodeJS, start by looking at the source code in `mt-demo-js/index.js`!
+Now that you understand how the integration works, try augmenting the Demo Gateway to actually communicate with your hardware and software! Then you can begin controlling and monitoring your own spacecraft. If you want to get a better sense of how easy it is to build a Gateway in NodeJS, start by looking at the source code in `example-nodejs-gateway/index.js`!
