@@ -1,0 +1,4 @@
+node_modules
+faker_satellite/file_lib/**.*
+faker_satellite/for_downlink/**.*
+run/downlinked_files/for_downlink/**.*

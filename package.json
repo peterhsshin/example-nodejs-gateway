@@ -1,0 +1,16 @@
+{
+  "name": "example-javascript-gateway",
+  "version": "1.0.0",
+  "description": "Demo Gateway in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Dmitry White <white.dmitry@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "majortom-gateway": "^0.3.4"
+  }
+}
