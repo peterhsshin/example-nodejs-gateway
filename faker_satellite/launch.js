@@ -139,6 +139,10 @@ const uplink_file_chunk = ({ id, chunk }) => {
   if (fileReceivers[id]) {
     receiveStream = fileReceivers[id];
   } else {
+    if (!fs.existsSync(path.join(__dirname, 'file_lib'))) {
+      fs.mkdirSync(path.join(__dirname, 'file_lib'));
+    }
+
     receiveStream = fs.createWriteStream(path.join(__dirname, 'file_lib', `file_${id}`));
     fileReceivers[id] = receiveStream;
   }
@@ -303,6 +307,10 @@ process.on('message', obj => {
     }));
   }
 });
+
+if (!fs.existsSync(path.join(__dirname, "for_downlink"))) {
+  fs.mkdirSync(path.join(__dirname, 'for_downlink'));
+}
 
 retrieveImageFile();
 process.send(commandDefinitions);

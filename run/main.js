@@ -265,8 +265,13 @@ const downlink_file = (gatewayControl, satellite, majorTom) => command => {
   const state = 'downlinking_from_system';
   const progress_1_label = 'File chunks downlinked';
   const tempFileLocation = path.join(__dirname, 'downlinked_files', filename);
+  const tempFileDir = path.dirname(tempFileLocation);
   let progress_1_current = 0;
   let progress_1_max = 0;
+
+  if (!fs.existsSync(tempFileDir)) {
+    fs.mkdirSync(tempFileDir, { recursive: true });
+  }
 
   const tempFileStream = fs.createWriteStream(tempFileLocation);
 
