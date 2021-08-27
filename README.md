@@ -24,11 +24,11 @@ Once you add the Gateway, you'll need the **Authentication Token** to connect th
 ![Gateway Page](assets/gateway_page.png "Gateway Page in Major Tom")
 
 ## Connect the Gateway
-1. You'll need to edit the file found at `mt-demo-js/connect/connection.json` in the following way:
+1. You'll need to edit the file found at `example-nodejs-gateway/connect/connection.json` in the following way:
 ```json
 {
   "gatewayToken": "<YOUR-GATEWAY-TOKEN>",
-  "host": "app.majortom.cloud" // Or your Major Tom url host location
+  "host": "app.majortom.cloud (Or your Major Tom url host location)"
 }
 ```
 2. From a terminal window in the `example-nodejs-gateway` directory, start the app using the start script:
