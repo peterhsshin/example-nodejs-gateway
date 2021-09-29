@@ -11,6 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
-    "majortom-gateway": "^0.3.4"
+    "majortom-gateway": "^0.3.6"
   }
 }
