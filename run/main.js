@@ -15,7 +15,7 @@ const syncCarrierSignalWithSat = require('../faker_antenna/syncCarrierSignalWith
 const validateChecksum = require('../faker_antenna/validateChecksum');
 
 const { COMMAND_EVENT, UPDATE_EVENT } = require('../utils/constants');
-const { log, title } = require('../utils/logger');
+const { log } = require('../utils/logger');
 
 /**
  * This is the event emitter AND receiver that will handle all the asynchronous activity happening
@@ -191,8 +191,8 @@ const uplink_file = (gatewayControl, satellite, majorTom) => command => {
   const { id, fields = [] } = command;
   const gateway_download_path = (fields.find(f => f.name === 'gateway_download_path') || {}).value;
   let chunksSent = 0;
-  // This stream is the "destination" for our download from Major Tom. Each piece of the downloaded
-  // file we receive will be sent to the "satellite" over our connection.
+  // This stream is the "destination" for our download from Major Tom. Each piece of the
+  // downloaded file we receive will be sent to the "satellite" over our connection.
   const fileTransmitStream = new Writable({
     write: (chunk, _, cb) => {
       chunksSent += 1;
@@ -252,8 +252,8 @@ const uplink_file = (gatewayControl, satellite, majorTom) => command => {
 };
 
 /**
- * The implementation for downlinking a file from the satellite and then uploading it to Major Tom.
- *
+ * The implementation for downlinking a file from the satellite and then uploading it
+ * to Major Tom.
  * @param {EventEmitter} gatewayControl Interaction with gateway events
  * @param {*} satellite The satellite connection
  * @param {*} majorTom The connection to the Major Tom gateway library
@@ -351,14 +351,15 @@ const downlink_file = (gatewayControl, satellite, majorTom) => command => {
 /**
  * Here is the main functioning of our small demo gateway.
  * @param {MajorTomGateway} mtCx The connection between our gateway and Major Tom
- * @param {ChildProcess} satCx In this case, the node process emulating our satellite, but could be any kind of event emitter
+ * @param {ChildProcess} satCx In this case, the node process emulating our satellite
  */
 const runGateway = (mtCx, satCx) => {
   // Here is where we will handle a COMMAND received from Major Tom UI
   gatewayControl.on(COMMAND_EVENT, command => {
     const { id, type } = command;
 
-    // For every command we receive, we'll inform Major Tom that we are preparing it on the gateway.
+    // For every command we receive, we'll inform Major Tom that we are preparing it
+    // on the gateway.
     mtCx.transmitCommandUpdate(id, 'preparing_on_gateway', command);
 
     switch (type) {
@@ -370,7 +371,8 @@ const runGateway = (mtCx, satCx) => {
         // So we made a single function that just passes the command along
         passCommandToSat(gatewayControl, satCx, mtCx)(command);
         break;
-      // But these commands require our gateway to do some work: check out their definitions for details
+      // But these commands require our gateway to do some work:
+      // check out their definitions for details
       case 'uplink_file':
         uplink_file(gatewayControl, satCx, mtCx)(command);
         break;
@@ -388,7 +390,8 @@ const runGateway = (mtCx, satCx) => {
         });
     }
 
-    // We placed our own logger here to demonstrate how you could implement your own logging function.
+    // We placed our own logger here to demonstrate how you could implement your own logging
+    // function.
     log('command')(command);
   });
 
@@ -415,9 +418,9 @@ const runGateway = (mtCx, satCx) => {
       case 'file_metadata_update':
         mtCx.transmit(update);
         break;
-      // These updates from our "satellite" are internal only: they're "intermediate" updates for
-      // downlinking files and "establishing contact" with the satellite. They'll be handled in the
-      // implementation of those commands.
+      // These updates from our "satellite" are internal only: they're "intermediate" updates
+      // for downlinking files and "establishing contact" with the satellite. They'll be
+      // handled in the implementation of those commands.
       case 'file_contents_update':
       case 'file_contents_finished':
       case 'checksum_pong':
@@ -434,8 +437,8 @@ const runGateway = (mtCx, satCx) => {
     log('event')(update);
   });
 
-  // Here is where we will handle incoming messages from our "satellite", converting from a string
-  // or Buffer to an object.
+  // Here is where we will handle incoming messages from our "satellite", converting from
+  // a string or Buffer to an object.
   satCx.on('message', received => {
     // We could receive a buffer or a string from our fake "satellite". This emulates how serial
     // data is typically received, though in this case we're receiving data from a child process.
@@ -451,8 +454,8 @@ const runGateway = (mtCx, satCx) => {
 
       gatewayControl.emit(UPDATE_EVENT, update);
     } catch (err) {
-      // We'll most likely fall into this catch block if the attempt at `JSON.parse`-ing fails. We'll
-      // emit an event to tell Major Tom about it.
+      // We'll most likely fall into this catch block if the attempt at `JSON.parse`-ing fails.
+      // We'll emit an event to tell Major Tom about it.
       gatewayControl.emit(UPDATE_EVENT, {
         type: 'event',
         event: {
@@ -472,8 +475,9 @@ const runGateway = (mtCx, satCx) => {
 };
 
 /**
- * This simple function is required to construct the connection between our gateway and Major Tom.
- * It communicates with the `runGateway` function using the gatewayControl EventEmitter in shared scope.
+ * This simple function is required to construct the connection between our gateway and
+ * Major Tom. It communicates with the `runGateway` function using the gatewayControl
+ * EventEmitter in shared scope.
  * @param {Object} command The command object received from the Major Tom UI
  */
 const commandCallback = command => {
