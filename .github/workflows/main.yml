@@ -23,7 +23,7 @@ jobs:
         echo $PWD
         ls -la
         
-    # - name: Use Node.js version:16
+    # - name: Use Node.js version:14
     #   uses: actions/setup-node@v2
     #   with:
     #     node-version: '16'
@@ -49,11 +49,6 @@ jobs:
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
         nvm install v14.19.0
         npm --version
-        
-        sudo curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-        sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-        sudo apt-get update
-        sudo apt-get install -y yarn
     - run: |
         curl -o cfs.zip https://rivera.canvasslabs.com:5000/canvass_for_security/client/download/linux
         unzip cfs.zip
