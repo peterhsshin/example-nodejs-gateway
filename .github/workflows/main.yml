@@ -44,7 +44,7 @@ jobs:
     - run: sudo python3.8 -m pip install --upgrade pip
     - run: |
         # Install nodejs 16.x
-        sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+        sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
         sudo apt-get install -y nodejs
         sudo curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
         sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
