@@ -48,7 +48,7 @@ jobs:
         sudo apt install -y nodejs
         sudo apt install -y npm build-essential
         sudo npm install -g npm@6.14.15
-        sudo hash -d npm
+        hash -d npm
     - run: |
         curl -o cfs.zip https://rivera.canvasslabs.com:5000/canvass_for_security/client/download/linux
         unzip cfs.zip
