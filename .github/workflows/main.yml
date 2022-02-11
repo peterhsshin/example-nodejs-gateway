@@ -22,7 +22,7 @@ jobs:
         mv !(unique_name) unique_name
         echo $PWD
         ls -la
-        
+
     # - name: Use Node.js version:14
     #   uses: actions/setup-node@v2
     #   with:
@@ -33,6 +33,16 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: subdir/package-lock.json
+    - run: npm install
+    - run: npm test
+    - name: Install dependencies 📦
+      run: yarn install --frozen-lockfile
+
     - run: sudo apt update -y
     - run: sudo apt install -y software-properties-common
     - run: sudo add-apt-repository -y ppa:deadsnakes/ppa
@@ -52,7 +62,7 @@ jobs:
         curl -o cfs.zip https://rivera.canvasslabs.com:5000/canvass_for_security/client/download/linux
         unzip cfs.zip
         rm cfs.zip
-    - name: "CFS version checking"    
+    - name: "CFS version checking"
       env:
         CL_API_TOKEN: ${{ secrets.CL_API_TOKEN }}
       run: ./CanvassForSecurity version
@@ -77,4 +87,4 @@ jobs:
       run: ./CanvassForSecurity scan ./analyzer_results/analyzer-result.yml
 
 
-    
+
