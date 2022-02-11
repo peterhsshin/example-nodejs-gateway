@@ -33,15 +33,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-        cache: 'npm'
-        cache-dependency-path: subdir/package-lock.json
-    - run: npm install
-    - run: npm test
-    - name: Install dependencies 📦
-      run: yarn install --frozen-lockfile
 
     - run: sudo apt update -y
     - run: sudo apt install -y software-properties-common
@@ -58,6 +49,8 @@ jobs:
         sudo apt install -y nodejs
         sudo apt install -y npm build-essential
         sudo npm install -g npm@6.14.15
+        sudo npm install --global yarn
+        sudo npm install -g typescript
     - run: |
         curl -o cfs.zip https://rivera.canvasslabs.com:5000/canvass_for_security/client/download/linux
         unzip cfs.zip
@@ -85,3 +78,6 @@ jobs:
       env:
         CL_API_TOKEN: ${{ secrets.CL_API_TOKEN }}
       run: ./CanvassForSecurity scan ./analyzer_results/analyzer-result.yml
+
+
+
